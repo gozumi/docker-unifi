@@ -1,0 +1,3 @@
+FROM myubuntu:0.0
+
+RUN systemctl start unifi.service

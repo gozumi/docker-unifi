@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y install ca-certificates
+RUN apt-get -y install apt-transport-https
+RUN apt-get -y install wget
+RUN apt-get -y install gnupg2
+RUN echo 'deb [arch=armhf] https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
+
+RUN wget -qO- https://dl.ui.com/unifi/unifi-repo.gpg | tee /etc/apt/trusted.gpg.d/unifi-repo.gpg 
+RUN apt-get update
+RUN apt-get install unifi -y
+
+RUN /usr/lib/unifi/bin/unifi.init start
